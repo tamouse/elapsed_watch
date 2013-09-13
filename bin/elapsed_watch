@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'methadone'
+require 'elapsed_watch.rb'
+
+class App
+  include Methadone::Main
+  include Methadone::CLILogging
+
+  main do |event_file|
+    puts ElapsedWatch.run(event_file, options).join("\n")
+  end
+
+  # supplemental methods here
+
+  # Declare command-line interface here
+
+  description ElapsedWatch::SUMMARY
+
+  # Accept flags via:
+  # on("--flag VAL","Some flag")
+  # options[flag] will contain VAL
+  #
+  # Specify switches via:
+  # on("--[no-]switch","Some switch")
+  #
+  # Or, just call OptionParser methods on opts
+  #
+  # Require an argument
+  # arg :some_arg 
+  #
+  # # Make an argument optional
+  # arg :optional_arg, :optional
+
+  arg :event_file, :optional, "File name of the events file. Defaults to #{ElapsedWatch::DEFAULT_EVENT_FILE} if not given"
+
+  version ElapsedWatch::VERSION
+
+  use_log_level_option
+
+  go!
+end
