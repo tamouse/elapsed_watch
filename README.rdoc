@@ -1,23 +1,45 @@
-= elapsed_watch - DESCRIBE YOUR GEM
+= elapsed_watch - Human-readable elapsed times for events
 
-Author::  YOUR NAME (YOUR EMAIL)
-Copyright:: Copyright (c) 2013 YOUR NAME
-
-
+Author::  Tamara Temple (tamouse@gmail.com)
+Copyright:: Copyright (c) 2013 Tamara Temple
 License:: mit, see LICENSE.txt
 
+Reading a file of events, containing an event name (a string) and a
+date-time string (yyyy-mm-dd hh:mm(:ss)), print a nice duration since
+the event (if the event occurs in the past) or until the event (if the
+event occurs in the future).
 
-
-DESCRIBE YOUR GEM HERE
+The impetous for this little program is my wanting to know how long it
+has been since my last cigarette.
 
 == Links
 
-* {Source on Github}[LINK TO GITHUB]
-* RDoc[LINK TO RDOC.INFO]
+* {Source on Github}[http://github.com/tamouse/elapsed_watch]
 
 == Install
 
+    gem install elapsed_watch
+
 == Examples
 
+The default events file is `$HOME/.eventsrc`. Other event files can be
+given on the command line:
+
+    elapsed_watch
+
+    elapsed_watch my_events
+
+== Events File
+
+The events file is a regular text file with one event per line:
+
+Event name: YYYY-MM-DD
+
+The date spec can be anything that Time.parse can handle.
+
+The events file is ERB-able, so you can program things if you wish.
+
 == Contributing
+
+See github repository for information on contributing.
 

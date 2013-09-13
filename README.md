@@ -1,6 +1,7 @@
 # ElapsedWatch
 
-TODO: Write a gem description
+ElapsedWatch is a tiny command line script that will read an events
+file and print out a nice, human-readable duration from or to the event.
 
 ## Installation
 
@@ -18,7 +19,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Prints a short help message:
+
+    $ elapsed_watch --help
+
+Prints the elapsed time for events in `$HOME/.eventsrc`:
+
+    $ elapsed_watch
+
+Prints the elapsed time for events in `my_events`:
+
+    $ elapsed_watch my_events
 
 ## Contributing
 
