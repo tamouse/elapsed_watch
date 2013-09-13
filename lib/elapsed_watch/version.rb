@@ -1,5 +1,5 @@
 module ElapsedWatch
-  VERSION = "0.0.1"
+  VERSION = "1.0.0"
 
   DESCRIPTION = "
 Reading a file of events, containing an event name (a string) and a
