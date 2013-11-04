@@ -4,10 +4,12 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
-  gem 'guard'
+  gem 'guard','~> 2'
   gem 'guard-bundler'
   gem 'guard-rspec'
   gem 'guard-cucumber'
   gem 'timecop'
+  gem 'growl'
+  gem 'growl_notify'
 end
 

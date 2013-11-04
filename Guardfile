@@ -6,7 +6,7 @@ guard 'cucumber', :cli => '--color --format pretty' do
   watch('bin/elapsed_watch') { 'features' }
 end
 
-guard :rspec, :cli => '--color --format documentation' do
+guard :rspec, :cmd => 'bundle exec rspec --color --format documentation', all_on_start: true do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -17,3 +17,5 @@ guard 'bundler' do
   watch('Gemfile')
   watch(/^.+\.gemspec/)
 end
+
+

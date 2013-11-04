@@ -16,5 +16,9 @@ RSpec.configure do |config|
   # config.order = 'random'
 end
 
+require 'methadone'
+extend Methadone::CLILogging
+logger.error_level = Logger::DEBUG
+
 require 'elapsed_watch'
 require 'timecop'

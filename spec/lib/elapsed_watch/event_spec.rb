@@ -41,10 +41,16 @@ describe ElapsedWatch do
     it{event3.instance_variable_get("@event_time").should eq Time.new(1957)}
   end
 
+  context "events with only MM-DD given" do
+    let(:event4) {ElapsedWatch::Event.new("Birthday: 10-12")}
+    it{event4.instance_variable_get("@event_name").should eq "Birthday"}
+    it{event4.instance_variable_get("@event_time").should eq Chronic.parse("10-12")}
+  end
+
+  
+
+
   context "sad paths" do
-    it "event without a day should fail" do
-      expect {ElapsedWatch::Event.new("No day: 2013-09")}.to raise_error ArgumentError
-    end
     it "event without a date should fail" do
       expect {ElapsedWatch::Event.new("No date:")}.to raise_error RuntimeError
     end
@@ -54,8 +60,9 @@ describe ElapsedWatch do
     it "event with empty name should fail" do
       expect {ElapsedWatch::Event.new(": 2013-09-01")}.to raise_error Psych::SyntaxError
     end
-    it "event with unparsable time spec should fail" do
-      expect {ElapsedWatch::Event.new("Bad spec: another fine mess")}.to raise_error ArgumentError
+    it "event with unparsable time spec should have nil time" do
+      event5 = ElapsedWatch::Event.new("Bad spec: another fine mess")
+      event5.instance_variable_get("@event_time").should be_nil
     end
 
 

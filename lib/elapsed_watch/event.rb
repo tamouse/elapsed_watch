@@ -1,7 +1,21 @@
+=begin rdoc
+
+event.rb -- defines the Class ElapsedWatch::Event for holding events
+
+* Time-stamp: <2013-11-04 06:26:02 tamara>
+* Copyright (C) 2013 Tamara Temple Web Development
+* Author:     Tamara Temple <tamouse@gmail.com>
+* License:    MIT
+
+=end
+
+
+require 'chronic'
 require 'chronic_duration'
 require 'yaml'
 require 'erb'
 require 'time'
+require 'methadone'
 
 module ElapsedWatch
 
@@ -11,31 +25,22 @@ module ElapsedWatch
   # The format for events occuring in the future
   FUTURE_EVENT_FORMAT = "%s in %s"    
 
-=begin rdoc
 
-event.rb -- Class for holding events
-
-* Time-stamp: <2013-09-13 01:42:22 tamara>
-* Copyright (C) 2013 Tamara Temple Web Development
-* Author:     Tamara Temple <tamouse@gmail.com>
-* License:    MIT
-
-== Description
-
-Defines an object class that deals with individual events.
-
-Events have a name and a time.
-
-=end
-
+  # == Description
+  #
+  # Defines an object class that deals with individual events.
+  #
+  # Events have a name and a time.
   class Event 
     
+    include Methadone::CLILogging
+
     # Instantiates a new Event object.
     #
     # The event_string consists of a tiny piece of YAML that defines
     # the event. The format is:
     #
-    # Event Name: YYYY-MM-DD HH:MM (anything parsable by Time.parse)
+    # Event Name: YYYY-MM-DD HH:MM (anything parsable by Chronic.parse)
     def initialize(event_string)
       raise "event_string is empty" if event_string.nil? or event_string.empty?
       ev_yaml = YAML.load(ERB.new(event_string).result)
@@ -45,7 +50,7 @@ Events have a name and a time.
       case @event_time
       when String
         raise "No event time spec: #{event_string}" if @event_time.empty?
-        @event_time = Time.parse(@event_time)
+        @event_time = Chronic.parse(@event_time)
       when Date
         @event_time = @event_time.to_time
       when DateTime
@@ -95,7 +100,7 @@ Events have a name and a time.
     
     # Memoizes now
     def now(use_time=nil)
-      @now ||= (use_time.nil? ? Time.now : use_time)
+      @now ||= use_time ||= Time.now
     end
 
   end

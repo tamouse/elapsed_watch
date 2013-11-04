@@ -22,11 +22,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency('rdoc')
   spec.add_development_dependency('aruba')
-  spec.add_development_dependency('rake', '~> 0.9.2')
   spec.add_development_dependency('rspec')
   spec.add_development_dependency('timecop')
   
   spec.add_dependency('methadone', '~> 1.3.0')
+  spec.add_dependency('chronic')
   spec.add_dependency('chronic_duration')
   
 end
